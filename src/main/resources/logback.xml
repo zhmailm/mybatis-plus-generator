@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <property resource="application.properties"/>
+    <!-- 控制台输出日志 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%X{logthreadId} [%date{yyyy-MM-dd HH:mm:ss.SSS}] %level %logger{80} [%thread] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <File>${log.path}/info.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.path}/history/info.%d{yyyyMMdd}-%i.log
+            </FileNamePattern>
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>10000</queueSize>
+        <appender-ref ref="FILE" />
+    </appender>
+
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework" level="WARN"></logger>
+    <logger name="org.springframework.boot" level="info"></logger>
+    <logger name="org.apache" level="WARN"></logger>
+    <logger name="org.hibernate.validator" level="WARN"></logger>
+    <logger name="springfox.documentation" level="info"></logger>
+    <logger name="io.lettuce.core" level="info"></logger>
+    <logger name="org.thymeleaf.TemplateEngine" level="info"></logger>
+    <logger name="org.springframework.jdbc" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="Console" />
+        <appender-ref ref="ASYNC" />
+    </logger>
+    <logger name="org.mybatis.spring" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="Console" />
+        <appender-ref ref="ASYNC" />
+    </logger>
+
+    <logger name="com.zhm" level="debug" includeLocation="true" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="ASYNC" />
+    </logger>
+
+    <root level="DEBUG" includeLocation="true" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="ASYNC" />
+    </root>
+
+</configuration>

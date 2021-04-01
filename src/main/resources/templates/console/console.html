@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('监控')"/>
+    <link rel="stylesheet" href="/admin/css/other/console2.css"/>
+</head>
+<body class="pear-container">
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md8">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        CPU使用
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">核心数</div>
+                                    <div class="count pear-text" th:text="${monitor.cpuInfo.cpuNum}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">系统使用率</div>
+                                    <div class="count pear-text" th:text="${monitor.cpuInfo.cSys}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">用户使用率</div>
+                                    <div class="count pear-text" th:text="${monitor.cpuInfo.user}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">当前使用率</div>
+                                    <div class="count pear-text" th:text="${monitor.cpuInfo.idle}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        内存使用
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space10">
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">最大内存</div>
+                                    <div class="count pear-text" th:text="${monitor.memInfo.total}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">空闲内存</div>
+                                    <div class="count pear-text" th:text="${monitor.memInfo.free}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">已用内存</div>
+                                    <div class="count pear-text" th:text="${monitor.memInfo.used}"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+                                <div class="pear-card2">
+                                    <div class="title">内存使用滤</div>
+                                    <div class="count pear-text" th:text="${monitor.memInfo.usageRate}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">主机信息</div>
+                <div class="layui-card-body">
+                    <table class="layui-table" lay-skin="line" title="主机信息">
+                        <tbody>
+                        <tr>
+                            <td>主机名称</td>
+                            <td class="pear-text" th:text="${monitor.sysInfo.computerName}"></td>
+                        </tr>
+                        <tr>
+                            <td>IP地址</td>
+                            <td class="pear-text" th:text="${monitor.sysInfo.computerIp}"></td>
+                        </tr>
+                        <tr>
+                            <td>主机系统</td>
+                            <td class="pear-text" th:text="${monitor.sysInfo.osName}"></td>
+                        </tr>
+                        <tr>
+                            <td>主机架构</td>
+                            <td class="pear-text" th:text="${monitor.sysInfo.osArch}"></td>
+                        </tr>
+                        <tr>
+                            <td>项目路径</td>
+                            <td class="pear-text" th:text="${monitor.sysInfo.userDir}"></td>
+                        </tr>
+                        <tr>
+                            <td>JDK信息</td>
+                            <td class="pear-text" th:text="${'JDK  ' + monitor.jvmInfo.jdkVersion}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jvm最大内存</td>
+                            <td class="pear-text" th:text="${monitor.jvmInfo.total}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jvm占用内存</td>
+                            <td class="pear-text" th:text="${monitor.jvmInfo.user}"></td>
+                        </tr>
+                        <tr>
+                            <td>Jvm剩余内存</td>
+                            <td class="pear-text" th:text="${monitor.jvmInfo.free}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md4">
+        <div class="layui-card">
+            <div class="layui-card-header">磁盘信息</div>
+            <div class="layui-card-body">
+                <ul class="pear-card-status">
+                    <li th:each="sysFileInfo:${monitor.sysFileInfo}">
+                        <p th:text="${sysFileInfo.typeName}"></p>
+                        磁盘大小&nbsp;<span class="pear-text" th:text="${sysFileInfo.total}"></span>&nbsp;&nbsp;
+                        空闲大小&nbsp;<span class="pear-text" th:text="${sysFileInfo.free}"></span>&nbsp;&nbsp;
+                        <br/>
+                        <br/>
+                        已经使用&nbsp;<span class="pear-text" th:text="${sysFileInfo.used}"></span>&nbsp;&nbsp;
+                        使用概率&nbsp;<span class="pear-text" th:text="${sysFileInfo.usage}"></span>
+                        <br/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script>
+    // 自动刷新数据 1分钟一次 一直刷新导致session 不失效
+    // setInterval(function () {
+    //     window.location.reload();
+    // }, 60 * 1000);
+</script>
+</body>
+</html>
