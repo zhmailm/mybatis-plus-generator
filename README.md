@@ -1,30 +1,39 @@
-# springboot-layui-manager
+# mybatis-plus-generator
 
-#### 模块划分
-|功能名称     |实现方式     |完成度     |功能名称     |实现方式     |完成度     |
-| --- | --- | --- | --- | --- | --- |
-|核心框架     |`Spring Boot `    |已完成     |接口文档     |`Swagger `    |已完成     |
-|权限管理     |`Spring Security`     |已完成     |代码生成     |`MyBatis Plus`     |已完成|
-|token管理     |`Jwt `    |已完成     |日志管理     |`quartz `    |已完成|
+可以再页面上直接配置代码生成涉及的参数值，一键生成增删改查的后台代码，bing支持swagger（前段代码需要配置相应的模板）
+#### 自动生成代码
+|功能名称     |配置文件     |完成度     
+| --- | --- | --- | 
+|controller     |controller.java.vm    |已完成   
+|service     |service.java.vm    |已完成    
+|domain     |domain.java.vm    |已完成    
+|mapper     |mapper.java.vm    |已完成   
+|mapper     |mapper.xml.vm    |已完成   
 
-#### 内置功能
-1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2.  权限管理：配置系统菜单，操作权限，按钮权限标识等。
-3.  角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
-4.  字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-5.  参数管理：对系统动态配置常用参数。
-6.  操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
-7.  登录日志：系统登录日志记录查询包含登录异常。
-8. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
-9. 系统接口：根据业务代码自动生成相关的api接口文档。
-10. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
-11. 在线构建器：拖动表单元素生成相应的HTML代码。
-12. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
-13. token管理：可以根据token调用接口信息，对接app，小程序。
-14. 日志管理：动态调整Cron表达式，并且输出查看日志信息
+#### 代码生成页面展示
 
-#### 数据库默认账号信息
-|账号名称    |密码          
-| ---   | --- |  
-|admin  |admin|
-|test  |123456|
+##### 主页展示
+<div>
+ <img   src="https://zhmailm.oss-cn-beijing.aliyuncs.com/img/gen/gen_index.jpg"/>
+</div>
+
+##### 配置页展示
+<div>
+ <img   src="https://zhmailm.oss-cn-beijing.aliyuncs.com/img/gen/gen_edit.jpg"/>
+</div>
+
+##### 预览页展示
+<div>
+ <img   src="https://zhmailm.oss-cn-beijing.aliyuncs.com/img/gen/gen_show.jpg"/>
+</div>
+
+#### 输出结果
+1：可以自动输出到压缩包中
+
+2：可以自动输出到代码里面
+
+#### 
+http://localhost:8087/console
+<div>
+ <img   src="https://zhmailm.oss-cn-beijing.aliyuncs.com/img/gen/gen_console.jpg"/>
+</div>
